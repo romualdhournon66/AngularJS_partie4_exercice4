@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+  <meta charset="utf-8">
+  <title>Exercice 4 partie 4</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+  <script src="assets/json/cars.json"></script>
+  <script src="assets/js/index.js"></script>
+</head>
+<body ng-app = "carsApp">
+<div ng-controller = "carsController">
+  <ul>
+    <li ng-repeat="car in arrayCars | filter:filterColor">
+    {{car.marque +" , " +car.couleur}}
+</ul>
+</div>
+<script>
+  var carsArray = angular.module('carsApp',[]);
+  carsArray.controller('carsController',function($scope,$http){
+    $http.get('assets/json/cars.json').then(function(result){
+      $scope.arrayCars = result.data;
+      $scope.filterColor = "!verte";
+    });
+  });
+</script>
+</body>
+</html>
